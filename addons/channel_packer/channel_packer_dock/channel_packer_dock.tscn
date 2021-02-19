@@ -1,0 +1,117 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/channel_packer/texture_slot/texture_slot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/channel_packer/channel_packer_dock/channel_packer_dock.gd" type="Script" id=2]
+[ext_resource path="res://addons/channel_packer/channel_packer_viewport/channel_packer_viewport.tscn" type="PackedScene" id=3]
+
+[node name="ChannelPackerDock" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 250 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopBar" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBoxContainer/TopBar"]
+margin_right = 868.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Channel Packer"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SizeLabel" type="Label" parent="VBoxContainer/TopBar"]
+margin_left = 872.0
+margin_top = 3.0
+margin_right = 946.0
+margin_bottom = 17.0
+text = "Result Size:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SizeOptionButton" type="OptionButton" parent="VBoxContainer/TopBar"]
+margin_left = 950.0
+margin_right = 979.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PackButton" type="Button" parent="VBoxContainer/TopBar"]
+margin_left = 983.0
+margin_right = 1024.0
+margin_bottom = 20.0
+text = "Pack"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureSlotContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 569.0
+custom_constants/separation = 43
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RedTextureSlot" parent="VBoxContainer/PanelContainer/TextureSlotContainer" instance=ExtResource( 1 )]
+margin_right = 308.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.619608, 0.168627, 0.168627, 1 )
+channel_name = "Red"
+
+[node name="GreenTextureSlot" parent="VBoxContainer/PanelContainer/TextureSlotContainer" instance=ExtResource( 1 )]
+margin_left = 351.0
+margin_right = 659.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.207843, 0.509804, 0.203922, 1 )
+channel_name = "Green"
+
+[node name="BlueTextureSlot" parent="VBoxContainer/PanelContainer/TextureSlotContainer" instance=ExtResource( 1 )]
+margin_left = 702.0
+margin_right = 1010.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.184314, 0.254902, 0.65098, 1 )
+channel_name = "Blue"
+
+[node name="ChannelPackerViewport" parent="." instance=ExtResource( 3 )]
+
+[connection signal="item_selected" from="VBoxContainer/TopBar/SizeOptionButton" to="." method="_on_SizeOptionButton_item_selected"]
+[connection signal="pressed" from="VBoxContainer/TopBar/PackButton" to="." method="_on_PackButton_pressed"]
